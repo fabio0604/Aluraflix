@@ -20,33 +20,6 @@
             </ul>
         </nav>
     </header>
-    <script>
-        let slideIndex = 0;
-        showSlides();
-        
-        function plusSlides(n) {
-            slideIndex += n;
-            showSlides();
-        }
-        
-        function showSlides() {
-            let slides = document.getElementsByClassName("mySlides");
-            if (slideIndex >= slides.length) { slideIndex = 0; }
-            if (slideIndex < 0) { slideIndex = slides.length - 1; }
-            
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
-            }
-            slides[slideIndex].style.display = "block";  
-        }
-        
-        // Mudar automaticamente a imagem a cada 5 segundos
-        setInterval(function() {
-            slideIndex++;
-            showSlides();
-        }, 5000);
-        </script>
-        
 </body>
 <section class="slideshow-container">
     <div class="mySlides fade">
@@ -62,7 +35,7 @@
         <img src="https://ogimg.infoglobo.com.br/in/2900673-38d-4be/FT1086A/O-ator-Ken-Jeong-carregado-pelo-elenco-de-Se-beber-nao-caseparte-2.-Foto-Sam-JonesDivulgacao.jpg" alt="Filme 4" style="width:100%">
     </div>
     <div class="mySlides fade">
-        <img src="imagem5.jpg" alt="Filme 5" style="width:100%">
+        <img src="https://www.einerd.com.br/wp-content/uploads/2020/02/Velozes-e-Furiosos-filmes-5-scaled-e1722632330120-890x556.jpg" alt="Filme 5" style="width:100%">
     </div>
 
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
