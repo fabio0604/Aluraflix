@@ -20,5 +20,53 @@
             </ul>
         </nav>
     </header>
+    <script>
+        let slideIndex = 0;
+        showSlides();
+        
+        function plusSlides(n) {
+            slideIndex += n;
+            showSlides();
+        }
+        
+        function showSlides() {
+            let slides = document.getElementsByClassName("mySlides");
+            if (slideIndex >= slides.length) { slideIndex = 0; }
+            if (slideIndex < 0) { slideIndex = slides.length - 1; }
+            
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slides[slideIndex].style.display = "block";  
+        }
+        
+        // Mudar automaticamente a imagem a cada 5 segundos
+        setInterval(function() {
+            slideIndex++;
+            showSlides();
+        }, 5000);
+        </script>
+        
 </body>
+<section class="slideshow-container">
+    <div class="mySlides fade">
+        <img src="https://wallpapers.com/images/hd/neon-john-wick-5a5e1t8lfgff7d73.jpg" alt="Filme 1" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+        <img src="https://i0.wp.com/www.arrobanerd.com.br/wp-content/uploads/2020/12/tom-and-jerry-cartaz.jpg?fit=800%2C450&ssl=1.webp" alt="Filme 2" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+        <img src="https://m.media-amazon.com/images/S/pv-target-images/1bd029f27555f7b11a636d40442167e5b7391c0f84b2c83eccd081e5abfad6f6._SX1080_FMjpg_.jpg" alt="filme 3" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+        <img src="https://ogimg.infoglobo.com.br/in/2900673-38d-4be/FT1086A/O-ator-Ken-Jeong-carregado-pelo-elenco-de-Se-beber-nao-caseparte-2.-Foto-Sam-JonesDivulgacao.jpg" alt="Filme 4" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+        <img src="imagem5.jpg" alt="Filme 5" style="width:100%">
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</section>
+
 </html>
