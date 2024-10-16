@@ -1,34 +1,12 @@
 body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     margin: 0;
-    overflow: hidden;
-    background-color: #87CEEB; /* Céu azul */
+    background-color: #000;
 }
 
-#game {
-    position: relative;
-    width: 400px;
-    height: 600px;
-    border: 2px solid #000;
-    overflow: hidden;
-    background-color: #228B22; /* Grama verde */
-}
-
-#car {
-    position: absolute;
-    width: 40px;
-    height: 80px;
-    background-color: red; /* Carro vermelho */
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-#obstacle {
-    position: absolute;
-    width: 40px;
-    height: 80px;
-    background-color: black; /* Obstáculo */
-    top: -80px; /* Começa fora da tela */
-    left: 50%;
-    transform: translateX(-50%);
+canvas {
+    border: 2px solid white;
 }
