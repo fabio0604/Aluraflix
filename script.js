@@ -1,101 +1,77 @@
-const dino = document.getElementById('dino');
-const game = document.getElementById('game');
-const scoreDisplay = document.getElementById('score');
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
 
+// Tamanho do bloco e da cobrinha
+const box = 20;
+let snake = [{ x: 9 * box, y: 9 * box }];
+let direction = '';
+let food = { x: Math.floor(Math.random() * 20) * box, y: Math.floor(Math.random() * 20) * box };
 let score = 0;
-let gameInterval;
-let isJumping = false;
 
-function startGame() {
-    gameInterval = setInterval(() => {
-        score++;
-        scoreDisplay.innerText = score;
-        spawnCar();
-    }, 1000);
-}
-
-function spawnCar() {
-    const car = document.createElement('div');
-    car.classList.add('car');
-    car.style.left = `${game.clientWidth}px`;
-    car.style.bottom = `${Math.random() * (game.clientHeight - 30)}px`;
-    
-    game.appendChild(car);
-    
-    moveCar(car);
-}
-
-function moveCar(car) {
-    const moveInterval = setInterval(() => {
-        const carPosition = parseInt(car.style.left);
-        
-        if (carPosition <= -30) {
-            clearInterval(moveInterval);
-            game.removeChild(car);
-        } else {
-            car.style.left = `${carPosition - 5}px`;
-
-            if (checkCollision(car)) {
-                clearInterval(moveInterval);
-                clearInterval(gameInterval);
-                alert(`Game Over! Sua pontuação: ${score}`);
-                resetGame();
-            }
-        }
-    }, 20);
-}
-
-function checkCollision(car) {
-    const dinoRect = dino.getBoundingClientRect();
-    const carRect = car.getBoundingClientRect();
-
-    return !(
-        dinoRect.top > carRect.bottom ||
-        dinoRect.bottom < carRect.top ||
-        dinoRect.right < carRect.left ||
-        dinoRect.left > carRect.right
-    );
-}
-
+// Mudança de direção
 document.addEventListener('keydown', (event) => {
-    if (event.code === 'Space' && !isJumping) {
-        jump();
-    }
+    if (event.key === 'ArrowUp' && direction !== 'DOWN') direction = 'UP';
+    if (event.key === 'ArrowDown' && direction !== 'UP') direction = 'DOWN';
+    if (event.key === 'ArrowLeft' && direction !== 'RIGHT') direction = 'LEFT';
+    if (event.key === 'ArrowRight' && direction !== 'LEFT') direction = 'RIGHT';
 });
 
-function jump() {
-    isJumping = true;
-    let jumpHeight = 0;
-    const jumpInterval = setInterval(() => {
-        if (jumpHeight >= 60) {
-            clearInterval(jumpInterval);
-            fall();
-        } else {
-            jumpHeight += 5;
-            dino.style.bottom = `${10 + jumpHeight}px`;
-        }
-    }, 20);
-}
+// Função para desenhar a cobrinha e a comida
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-function fall() {
-    const fallInterval = setInterval(() => {
-        if (parseInt(dino.style.bottom) <= 10) {
-            clearInterval(fallInterval);
-            isJumping = false;
-            dino.style.bottom = '10px';
-        } else {
-            dino.style.bottom = `${parseInt(dino.style.bottom) - 5}px`;
-        }
-    }, 20);
-}
+    // Desenho da comida
+    ctx.fillStyle = 'red';
+    ctx.fillRect(food.x, food.y, box, box);
 
-function resetGame() {
-    score = 0;
-    scoreDisplay.innerText = score;
-    while (game.firstChild) {
-        game.removeChild(game.firstChild);
+    // Desenho da cobrinha
+    for (let i = 0; i < snake.length; i++) {
+        ctx.fillStyle = `hsl(${(i * 30) % 360}, 100%, 50%)`; // Efeito arco-íris
+        ctx.fillRect(snake[i].x, snake[i].y, box, box);
     }
-    startGame();
+
+    // Movimento da cobrinha
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    if (direction === 'UP') snakeY -= box;
+    if (direction === 'DOWN') snakeY += box;
+    if (direction === 'LEFT') snakeX -= box;
+    if (direction === 'RIGHT') snakeX += box;
+
+    // Comida
+    if (snakeX === food.x && snakeY === food.y) {
+        score++;
+        food = {
+            x: Math.floor(Math.random() * 20) * box,
+            y: Math.floor(Math.random() * 20) * box
+        };
+    } else {
+        snake.pop(); // Remove a cauda
+    }
+
+    // Adiciona nova cabeça
+    const newHead = { x: snakeX, y: snakeY };
+
+    // Colisão com a borda ou com a própria cobra
+    if (snakeX < 0 || snakeX >= canvas.width || snakeY < 0 || snakeY >= canvas.height || collision(newHead, snake)) {
+        clearInterval(game);
+        alert(`Game Over! Sua pontuação: ${score}`);
+        document.location.reload();
+    }
+
+    snake.unshift(newHead); // Adiciona a nova cabeça
 }
 
-startGame();
+// Função para verificar colisão
+function collision(head, array) {
+    for (let i = 0; i < array.length; i++) {
+        if (head.x === array[i].x && head.y === array[i].y) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Loop do jogo
+const game = setInterval(draw, 100);
