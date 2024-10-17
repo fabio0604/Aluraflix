@@ -1,77 +1,24 @@
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
+// Array com pistas e respostas de filmes
+const filmes = [
+    { dica: "Um grupo de amigos encontra criaturas sobrenaturais em uma cidade pequena.", resposta: "Stranger Things" },
+    { dica: "Um ladrão que rouba segredos através da invasão nos sonhos das pessoas.", resposta: "A Origem" },
+    { dica: "Um jovem bruxo enfrenta seu destino em uma escola de magia.", resposta: "Harry Potter" },
+    { dica: "Um super-herói bilionário que usa tecnologia para combater o crime.", resposta: "Homem de Ferro" }
+];
 
-// Tamanho do bloco e da cobrinha
-const box = 20;
-let snake = [{ x: 9 * box, y: 9 * box }];
-let direction = '';
-let food = { x: Math.floor(Math.random() * 20) * box, y: Math.floor(Math.random() * 20) * box };
-let score = 0;
+// Escolher um filme aleatório
+let filmeAtual = filmes[Math.floor(Math.random() * filmes.length)];
 
-// Mudança de direção
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowUp' && direction !== 'DOWN') direction = 'UP';
-    if (event.key === 'ArrowDown' && direction !== 'UP') direction = 'DOWN';
-    if (event.key === 'ArrowLeft' && direction !== 'RIGHT') direction = 'LEFT';
-    if (event.key === 'ArrowRight' && direction !== 'LEFT') direction = 'RIGHT';
-});
+// Atualizar a pista no HTML
+document.getElementById("hint").innerText = "Pista: " + filmeAtual.dica;
 
-// Função para desenhar a cobrinha e a comida
-function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+// Função para verificar a resposta do usuário
+function checkGuess() {
+    const userGuess = document.getElementById("guess-input").value;
 
-    // Desenho da comida
-    ctx.fillStyle = 'red';
-    ctx.fillRect(food.x, food.y, box, box);
-
-    // Desenho da cobrinha
-    for (let i = 0; i < snake.length; i++) {
-        ctx.fillStyle = `hsl(${(i * 30) % 360}, 100%, 50%)`; // Efeito arco-íris
-        ctx.fillRect(snake[i].x, snake[i].y, box, box);
-    }
-
-    // Movimento da cobrinha
-    let snakeX = snake[0].x;
-    let snakeY = snake[0].y;
-
-    if (direction === 'UP') snakeY -= box;
-    if (direction === 'DOWN') snakeY += box;
-    if (direction === 'LEFT') snakeX -= box;
-    if (direction === 'RIGHT') snakeX += box;
-
-    // Comida
-    if (snakeX === food.x && snakeY === food.y) {
-        score++;
-        food = {
-            x: Math.floor(Math.random() * 20) * box,
-            y: Math.floor(Math.random() * 20) * box
-        };
+    if (userGuess.toLowerCase() === filmeAtual.resposta.toLowerCase()) {
+        document.getElementById("result").innerText = "Parabéns! Você acertou!";
     } else {
-        snake.pop(); // Remove a cauda
+        document.getElementById("result").innerText = "Resposta errada. Tente novamente!";
     }
-
-    // Adiciona nova cabeça
-    const newHead = { x: snakeX, y: snakeY };
-
-    // Colisão com a borda ou com a própria cobra
-    if (snakeX < 0 || snakeX >= canvas.width || snakeY < 0 || snakeY >= canvas.height || collision(newHead, snake)) {
-        clearInterval(game);
-        alert(`Game Over! Sua pontuação: ${score}`);
-        document.location.reload();
-    }
-
-    snake.unshift(newHead); // Adiciona a nova cabeça
 }
-
-// Função para verificar colisão
-function collision(head, array) {
-    for (let i = 0; i < array.length; i++) {
-        if (head.x === array[i].x && head.y === array[i].y) {
-            return true;
-        }
-    }
-    return false;
-}
-
-// Loop do jogo
-const game = setInterval(draw, 100);
