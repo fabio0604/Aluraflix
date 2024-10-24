@@ -60,7 +60,7 @@
   
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: “Chakra Petch”, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
@@ -79,6 +79,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: “Chakra Petch”, sans-serif;
 }
 
 header .logo h1 {
@@ -123,6 +124,7 @@ p {
     font-size: 1.1em;
     color: #666;
     line-height: 1.6;
+    font-family: “Chakra Petch”, sans-serif;
 }
 
 .recomendacoes {
@@ -182,4 +184,5 @@ button:hover {
     margin-top: 20px;
     text-align: center;
     color: #999;
+    font-family: “Chakra Petch”, sans-serif;
 }
