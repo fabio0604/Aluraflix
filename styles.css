@@ -18,17 +18,37 @@ h1 {
     text-align: center;
 }
 
-.movie {
-    margin: 100px 0;
+#game-container {
+    display: flex;
+    justify-content: space-between;
 }
 
-iframe {
-    width: 10000%;
-    height: 10000px;
-    border: none;
-    margin-bottom: 10px;
+#movie-descriptions {
+    width: 45%;
 }
 
-.synopsis {
+#movie-titles {
+    width: 45%;
+}
+
+.movie-description, .movie-title {
     margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.movie-title {
+    background-color: #e2e2e2;
+}
+
+.selected {
+    background-color: #cce5ff;
+}
+
+#result {
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
 }
