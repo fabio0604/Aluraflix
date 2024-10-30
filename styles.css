@@ -25,7 +25,15 @@ body {
     position: absolute;
     background-image: url('https://via.placeholder.com/50x50/FF6347/FFFFFF?text=🐦'); /* Ícone de passarinho */
     background-size: cover;
-    cursor: pointer;
+}
+
+#crosshair {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    background-image: url('https://via.placeholder.com/30x30/FFFFFF/FF0000?text=+'); /* Ícone de mira */
+    background-size: cover;
+    pointer-events: none; /* Para não interferir na interação com os passarinhos */
 }
 
 #score {
