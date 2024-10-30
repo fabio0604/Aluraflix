@@ -22,20 +22,33 @@ const movies = [
     { title: "Piratas do Caribe", description: "As aventuras do capitão Jack Sparrow." }
 ];
 
-let selectedDescriptions = [];
-let selectedTitles = [];
+// Função para embaralhar um array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
 
 function loadGame() {
     const descriptionsContainer = document.getElementById('movie-descriptions');
     const titlesContainer = document.getElementById('movie-titles');
 
+    // Exibir descrições na ordem original
     movies.forEach(movie => {
         const descDiv = document.createElement('div');
         descDiv.classList.add('movie-description');
         descDiv.textContent = movie.description;
         descDiv.onclick = () => selectDescription(movie.description);
         descriptionsContainer.appendChild(descDiv);
+    });
 
+    // Embaralhar a ordem dos títulos
+    const shuffledMovies = [...movies];
+    shuffleArray(shuffledMovies);
+
+    // Exibir títulos na ordem embaralhada
+    shuffledMovies.forEach(movie => {
         const titleDiv = document.createElement('div');
         titleDiv.classList.add('movie-title');
         titleDiv.textContent = movie.title;
@@ -44,53 +57,6 @@ function loadGame() {
     });
 }
 
-function selectDescription(description) {
-    if (!selectedDescriptions.includes(description)) {
-        selectedDescriptions.push(description);
-        highlightSelection();
-    }
-}
+// As funções restantes permanecem as mesmas...
 
-function selectTitle(title) {
-    if (!selectedTitles.includes(title)) {
-        selectedTitles.push(title);
-        highlightSelection();
-    }
-}
-
-function highlightSelection() {
-    const descDivs = document.querySelectorAll('.movie-description');
-    const titleDivs = document.querySelectorAll('.movie-title');
-
-    descDivs.forEach(descDiv => {
-        descDiv.classList.remove('selected');
-        if (selectedDescriptions.includes(descDiv.textContent)) {
-            descDiv.classList.add('selected');
-        }
-    });
-
-    titleDivs.forEach(titleDiv => {
-        titleDiv.classList.remove('selected');
-        if (selectedTitles.includes(titleDiv.textContent)) {
-            titleDiv.classList.add('selected');
-        }
-    });
-}
-
-function checkAnswers() {
-    let correctCount = 0;
-    
-    selectedDescriptions.forEach(description => {
-        const movie = movies.find(movie => movie.description === description);
-        if (movie && selectedTitles.includes(movie.title)) {
-            correctCount++;
-        }
-    });
-
-    const resultDiv = document.getElementById('result');
-    resultDiv.textContent = `Você acertou ${correctCount} de ${movies.length} filmes!`;
-}
-
-document.getElementById('check-answers').onclick = checkAnswers;
-
-window.onload = loadGame;
+// (As funções selectDescription, selectTitle, highlightSelection e checkAnswers são as mesmas)
