@@ -3,69 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-    <title>Recomendador de Filmes e Séries</title>
+    <title>Recomendador de Vídeos do YouTube</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <header>
-        <div class="logo">
-            <h1>Recomendador de Filmes e Séries</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#">Início</a></li>
-                <li><a href="#">Filmes</a></li>
-                <li><a href="#">Séries</a></li>
-                <li><a href="#">Contato</a></li>
-            </ul>
-        </nav>
-    </header>
-
     <div class="container">
-        <p>
-            Aqui você encontrará sugestões personalizadas de filmes e séries para assistir. Nossa missão é ajudar você a descobrir
-            títulos incríveis que se encaixam nos seus gostos, seja você fã de ação, drama, comédia, ou suspense.
-        </p>
-
-        <!-- Jogo de Adivinhação -->
-        <div id="game-container">
-            <h2>Jogo de Adivinhação: Qual é o Filme?</h2>
-            <p id="hint">Pista: Um grupo de amigos encontra criaturas sobrenaturais em uma cidade pequena.</p>
-            
-            <input type="text" id="guess-input" placeholder="Digite o nome do filme">
-            <button onclick="checkGuess()">Adivinhar</button>
-            
-            <p id="result"></p>
-        </div>
-
-        <div class="recomendacoes">
-            <div class="recomendacao">
-                <h3>Filme: A Origem (2010)</h3>
-                <p>
-                    Um thriller de ficção científica que explora o mundo dos sonhos e da mente humana. Dirigido por Christopher Nolan, 
-                    "A Origem" é um filme cheio de ação e reviravoltas emocionantes.
-                </p>
-            </div>
-
-            <div class="recomendacao">
-                <h3>Série: Stranger Things (2016 - Presente)</h3>
-                <p>
-                    Um grupo de crianças descobre mistérios sobrenaturais em sua pequena cidade. "Stranger Things" mistura aventura, 
-                    ficção científica e nostalgia dos anos 80 em uma série envolvente.
-                </p>
-            </div>
-        </div>
+        <h1>Recomendador de Vídeos do YouTube</h1>
+        <div id="video-list"></div>
     </div>
-
-    <div class="footer">
-        <p>© 2024 - Recomendador de Filmes e Séries</p>
-    </div>
-
     <script src="script.js"></script>
-
 </body>
 </html>
