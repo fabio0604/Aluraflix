@@ -1,7 +1,7 @@
 const videos = [
     {
-        title: "Aprendendo JavaScript",
-        url: "https://www.youtube.com/embed/Wp6P69GCh8E"
+        title: "Filme Titanic Completo",
+        url: "https://www.youtube.com/watch?v=3nOydQf2tYQ"
     },
     {
         title: "HTML e CSS para Iniciantes",
