@@ -1,29 +1,37 @@
-const videos = [
+const movies = [
     {
-        title: "Filme Titanic Completo",
-        url: "https://youtu.be/3nOydQf2tYQ?si=GDLztjPPUr2hQ-i2"
+        title: "A Origem",
+        trailer: "https://www.youtube.com/embed/8hP9D6kZseM",
+        fullMovie: "https://www.youtube.com/embed/Yo1U4VZf3Jk",
+        synopsis: "Um ladrão que invade os sonhos das pessoas é oferecido uma chance de redenção se conseguir implantar uma ideia na mente de alguém."
     },
     {
-        title: "HTML e CSS para Iniciantes",
-        url: "https://www.youtube.com/embed/UB1O30fR-EE"
+        title: "O Senhor dos Anéis: A Sociedade do Anel",
+        trailer: "https://www.youtube.com/embed/V75dMMIW2B4",
+        fullMovie: "https://www.youtube.com/embed/V75dMMIW2B4",
+        synopsis: "Um hobbit é escolhido para levar um anel mágico a Mordor, onde ele deve destruí-lo antes que ele caia nas mãos do Senhor das Trevas."
     },
     {
-        title: "React para Iniciantes",
-        url: "https://www.youtube.com/embed/dGcsHMXbSOA"
+        title: "Interstellar",
+        trailer: "https://www.youtube.com/embed/zSWdZVtXT7E",
+        fullMovie: "https://www.youtube.com/embed/zSWdZVtXT7E",
+        synopsis: "Um grupo de exploradores viaja através de um buraco de minhoca em busca de um novo lar para a humanidade."
     }
 ];
 
-function displayVideos() {
-    const videoList = document.getElementById('video-list');
-    videos.forEach(video => {
-        const videoDiv = document.createElement('div');
-        videoDiv.classList.add('video');
-        videoDiv.innerHTML = `
-            <h2>${video.title}</h2>
-            <iframe src="${video.url}" frameborder="0" allowfullscreen></iframe>
+function displayMovies() {
+    const movieList = document.getElementById('movie-list');
+    movies.forEach(movie => {
+        const movieDiv = document.createElement('div');
+        movieDiv.classList.add('movie');
+        movieDiv.innerHTML = `
+            <h2>${movie.title}</h2>
+            <iframe src="${movie.trailer}" allowfullscreen></iframe>
+            <div class="synopsis">${movie.synopsis}</div>
+            <iframe src="${movie.fullMovie}" allowfullscreen></iframe>
         `;
-        videoList.appendChild(videoDiv);
+        movieList.appendChild(movieDiv);
     });
 }
 
-window.onload = displayVideos;
+window.onload = displayMovies;
