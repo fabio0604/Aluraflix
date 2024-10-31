@@ -21,32 +21,14 @@ body {
     max-width: 600px;
 }
 
-input[type="text"] {
-    width: 80%;
-    padding: 10px;
-    margin-top: 10px;
-    font-size: 16px;
-}
-
-button {
-    padding: 10px 20px;
-    margin-top: 10px;
-    background-color: #ff5733;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #c70039;
+h1 {
+    margin-bottom: 20px;
 }
 
 #trailerContainer {
-    margin-top: 20px;
-    background-color: blue;
-    size-adjust: normal;
-    width: 30px;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 iframe {
